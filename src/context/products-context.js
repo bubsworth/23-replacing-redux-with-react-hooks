@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { toggleFav } from "../store/actions/products";
 
 export const ProductsContext = React.createContext({
   products: [],
@@ -34,11 +33,9 @@ export default (props) => {
     },
   ]);
 
-  const toggleFavorite = (ProductId) => {
+  const toggleFavorite = (productId) => {
     setProductsList((currentProdList) => {
-      const prodIndex = currentProdList.findIndex(
-        (p) => p.id === currentProdListproductId,
-      );
+      const prodIndex = currentProdList.findIndex((p) => p.id === productId);
       const newFavStatus = !currentProdList[prodIndex].isFavorite;
       const updatedProducts = [...currentProdList];
       updatedProducts[prodIndex] = {
@@ -53,7 +50,7 @@ export default (props) => {
     <ProductsContext.Provider
       value={{ products: productsList, toggleFav: toggleFavorite }}
     >
-      {props.chilrden}
+      {props.children}
     </ProductsContext.Provider>
   );
 };
